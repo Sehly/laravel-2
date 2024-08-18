@@ -9,8 +9,46 @@ use Illuminate\Http\Request;
 
 class StudentsController extends Controller
 {
+    // Api 
+    public function getAllStudents ()
+    {
+        $result = Student::all();
+        return response()->json($result,200);
+    }
+
+    public function getStudent($id)
+    {
+        $result = Student::findOrFail($id);
+        return response()->json($result,200);
+    }
+
+    public function addStudent(Request $request)
+    {
+        $result = Student::create($request->all());
+        return response($result,201);
+    }
+
+
+    public function updateStudent(Request $request , $id)
+    {
+        $result = Student::findOrFail($id);
+        $result->update($request->all());
+        return response($result,200);
+    }
+
+    public function deleteStudent($id)
+    {
+        $result = Student::findOrFail($id);
+        $result = Student::destroy($id);
+        return response()->json(['message'=>'student deleted'],200);
+    }
+
+
+    //
+
+
     public function index() {
-    $students = Student::all();
+    $students = Student::paginate(5);
     return view('students.index', compact('students'));
     }
 
@@ -82,8 +120,5 @@ class StudentsController extends Controller
 
         return redirect()->route('students.index')->with('success','Student Updated');
     }
-
-
-
 
 }

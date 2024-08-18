@@ -13,11 +13,13 @@ class CourseController extends Controller
         $courses=Course::paginate(5);
         return view('courses.index',compact('courses'));
     }
+
     public function create()
     {
         //
         return view('courses.create');
     }
+    
     public function store(Request $request){
         $validatedData = $request->validate([
             'name'=>'required|unique:courses|min:2',

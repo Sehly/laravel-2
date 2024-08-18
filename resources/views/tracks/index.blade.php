@@ -26,14 +26,13 @@
 
         @foreach ($tracks as $track)
             <tr>
-              
-            <td scope="row" >{{ $track['id'] }}</td>
-            <td scope="row" >{{ $track['name'] }}</td>
-            <td scope="row" >{{ $track['hours'] }}</td>
-            <td scope="row" >{{ $track['startDate'] }}</td>
+            <td scope="row" >{{ $track->id }}</td>
+            <td scope="row" >{{ $track->name }}</td>
+            <td scope="row" >{{ $track->hours }}</td>
+            <td scope="row" >{{ $track->startDate }}</td>
                 <td>
                    
-                   <a href="{{route('tracks.view',$track->id)}}"> <button class="btn btn-warning">View</button></a>
+                   <a href="{{route('tracks.show',$track->id)}}"> <button class="btn btn-warning">View</button></a>
                 </td>
                 <td>
                    <form action="{{ route('tracks.destroy', $track->id) }}" method="POST" >
@@ -50,6 +49,9 @@
 
     </tbody>
 </table>
+<div class="m-auto w-25 mt-2">
+    {{$tracks ->links()}}
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>

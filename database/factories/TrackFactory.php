@@ -1,13 +1,13 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Course;
+use App\Models\Track;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Course>
  */
-class CourseFactory extends Factory
+class TrackFactory extends Factory
 {
 
      /**
@@ -18,8 +18,8 @@ class CourseFactory extends Factory
 
             return [
         'name'=>fake()->unique->name(),
-        'description'=>fake()->unique->text(),
-        'total_grades'=>fake()->numberBetween(50, 200),
+        'hours'=>fake()->numberBetween(10, 50),
+        'startDate'=>fake()->date(),
             ];
        
     }

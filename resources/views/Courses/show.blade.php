@@ -16,7 +16,7 @@
         </div>
         <div class="card-body">
         <p><strong>Description: </strong>{{ $course->description }}</p>
-        <p><strong>Total Grade : </strong>{{ $course->totalGrade }}</p>
+        <p><strong>Total Grade : </strong>{{ $course->total_grades }}</p>
         </div>
         </div>
         <x-a-component type="success" locate="{{ route('courses.index') }}">

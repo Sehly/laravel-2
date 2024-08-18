@@ -19,6 +19,7 @@
       <th scope="col">Email</th>
       <th scope="col">Age</th>
       <th scope="col">Gender</th>
+      <th scope="col">Track ID</th>
       <th scope="col">Profile</th>
       <th scope="col">Actions</th>
     </tr>
@@ -31,6 +32,7 @@
       <td>{{ $student->email}}</td>
       <td>{{ $student->age}}</td>
       <td>{{ $student->gender}}</td>
+      <td>{{ $student->track_id}}</td>
       <td>
       @if ($student->image)
           <img src="{{ asset('storage/' . $student->image) }}" alt="Student Image" width="50">
@@ -62,6 +64,9 @@
 </table>
   </tbody>
 </table>
+<div class="m-auto w-25 mt-2">
+    {{$students ->links()}}
+    </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

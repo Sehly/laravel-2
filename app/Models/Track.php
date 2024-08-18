@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Track extends Model
 {
     use HasFactory;
-    protected $table="track";
-
+    protected $fillable=['name','hours','startDate'];
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

@@ -2,30 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Track; // Corrected this line to import the Track model
 use Illuminate\Http\Request;
+
+use App\Models\Track; 
+
 use Illuminate\Support\Facades\DB;
 
 class TrackController extends Controller
 {
 
-    function index()
+    public function index()
     {
-        $tracks= Track::all();
-        return view('tracks', compact("tracks"));
+        $tracks = Track::paginate(5);
+        return view('tracks.index', compact("tracks"));
     }
 
-    function view($id)
+
+    public function create()
+    {
+        //
+        return view('tracks.create');
+    }
+
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'name'=>'required|unique:tracks|min:2',
+            'hours'=>'required|',
+        ]);
+        Track::create($validatedData);
+        return to_route('tracks.index');
+    }
+
+    function show($id)
     {
         $track = Track::find($id);
-        return view('trackData', compact("track"));
+        return view('tracks.show', compact("track"));
     }
 
-    public function destroy($id)
+    public function edit(Track $track)
     {
-        $tracks = Track::find($id);
-        $tracks->delete();
-
-        return redirect()->route('tracks.index')->with('success', 'Track deleted successfully');
+        //
+        return view('tracks.edit',compact('track'));
     }
+
+    public function update(Request $request, Track $track)
+        {
+            $validatedData = $request->validate([
+                'name'=>'required|unique:tracks|min:2',
+                'hours'=>'required|',
+            ]);
+
+
+            $track->update($validatedData);
+            return to_route('tracks.index');
+        }
+
+        public function destroy(Track $track) 
+        {
+            //
+            $track->delete();
+            return to_route('tracks.index');
+        }
+
 }
